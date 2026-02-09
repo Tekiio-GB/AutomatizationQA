@@ -1,0 +1,19 @@
+<tool scriptid="customtool_prueba_acp">
+    <name>Gia Item Manager MCP Tool</name>
+
+    <scriptfile>[/SuiteScripts/testScripts/prueba_acp.js]</scriptfile>
+    <rpcschema>[/SuiteScripts/testScripts/prueba_schema_acp.json]</rpcschema>
+
+    <exposeto3rdpartyagents>T</exposeto3rdpartyagents>
+
+    <permissions>
+        <permission>
+            <permkey>LIST_ITEM</permkey>
+            <permlevel>FULL</permlevel>
+        </permission>
+        <permission>
+            <permkey>LIST_ACCOUNT</permkey>
+            <permlevel>VIEW</permlevel>
+        </permission>
+    </permissions>
+</tool>

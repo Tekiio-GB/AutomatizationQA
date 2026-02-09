@@ -1,0 +1,208 @@
+{
+	"tools": [
+		{
+			"name": "searchCustomer",
+			"description": "Search for customers in NetSuite based on a partial name match. With an empty string, it retrieves all customers.",
+			"inputSchema": {
+				"type": "object",
+				"properties": {
+					"query": {
+						"type": "string",
+						"description": "query search string"
+					}
+				},
+				"required": ["query"]
+			},
+			"annotations": {
+				"title": "Search for Customers",
+				"readOnlyHint": true,
+				"idempotentHint": true,
+				"openWorldHint": false
+			}
+		},
+		{
+			"name": "getCustomerDetails",
+			"description": "Get detailed information about a specific customer",
+			"inputSchema": {
+				"type": "object",
+				"properties": {
+					"customerId": {
+						"type": "string",
+						"description": "The customer ID"
+					}
+				},
+				"required": ["customerId"]
+			},
+			"annotations": {
+				"title": "Get Customer Details",
+				"readOnlyHint": true,
+				"idempotentHint": true,
+				"openWorldHint": false
+			}
+		},
+		{
+			"name": "createCustomer",
+			"description": "Create a customer in NetSuite. Use 'F' in isperson to state if is a person or company. Use 'T' in isperson field to state this is a person or 'F' if it a company. In case it's a company, the company name is mandatory. In case it's a person, firstname and lastname are mandatory",
+			"inputSchema": {
+				"type": "object",
+				"properties": {
+					"isperson": {
+						"type": "string",
+						"description": "Siempre 'F', esto para indicar que es una empresa"
+					},
+					"firstname": {
+						"type": "string",
+						"description": "Customer's first name. Si isperson is 'T' this field is mandatory"
+					},
+					"lastname": {
+						"type": "string",
+						"description": "Customer's last name. Si esperson is 'T' this field is mandatory"
+					},
+					"email": {
+						"type": "string",
+						"description": "Customer's email"
+					},
+					"phone": {
+						"type": "string",
+						"description": "Customer's phone number"
+					},
+					"companyname": {
+						"type": "string",
+						"description": "Customer's company name. Se isperson is 'F' this field is mandatory"
+					},
+					"creditlimit": {
+						"type": "number",
+						"description": "Customer's credit limit"
+					},
+					"subsidiary": {
+						"type": "string",
+						"description": "The subsidiary ID = 5"
+					},
+					"custentity_l54_nombre_legal": {
+						"type": "string",
+						"description": "Nombre legal del cliente"
+					},
+					"custentity_l54_tipo_documento": {
+						"type": "number",
+						"description": "Tipo de documento ID (CUIT = 3)"
+					},
+					"custentity_l54_tipo_contribuyente": {
+						"type": "number",
+						"description": "Tipo de contribuyente ID (Consumidor Final = 1)"
+					},
+					"vatregnumber": {
+						"type": "string",
+						"description": "Indica el registro de identificación fiscal del cliente, siempre = 112325478978"
+					}
+				},
+				"required": ["isperson", "subsidiary", "custentity_l54_tipo_documento", "custentity_l54_tipo_contribuyente", "vatregnumber"]
+			},
+			"annotations": {
+				"title": "Create Customer",
+				"readOnlyHint": true,
+				"idempotentHint": true,
+				"openWorldHint": false
+			}
+		},
+		{
+			"name": "updateCustomer",
+			"description": "Updates the customer information in NetSuite",
+			"inputSchema": {
+				"type": "object",
+				"properties": {
+					"customerId": {
+						"type": "string",
+						"description": "ID of the customer to edit"
+					},
+					"firstname": {
+						"type": "string",
+						"description": "Customer's first name"
+					},
+					"lastname": {
+						"type": "string",
+						"description": "Customer's last name"
+					},
+					"email": {
+						"type": "string",
+						"description": "Customer's email"
+					},
+					"phone": {
+						"type": "string",
+						"description": "Customer's phone number"
+					},
+					"companyname": {
+						"type": "string",
+						"description": "Customer's company name"
+					},
+					"creditlimit": {
+						"type": "number",
+						"description": "Customer's credit limit"
+					},
+					"subsidiary": {
+						"type": "string",
+						"description": "The subsidiary ID"
+					},
+					"isperson": {
+						"type": "string",
+						"description": "States whether or not this customer is a person ('T') or a company ('F')"
+					}
+				},
+				"required": ["customerId"]
+			},
+			"annotations": {
+				"title": "Update Customer Information",
+				"readOnlyHint": true,
+				"idempotentHint": true,
+				"openWorldHint": false
+			}
+		},
+		{
+			"name": "getCustomerTransactions",
+			"description": "Get transaction history for a customer. Always use MM/DD/YYYY format for dates.",
+			"inputSchema": {
+				"type": "object",
+				"properties": {
+					"customerId": {
+						"type": "string",
+						"description": "The NetSuite ID of the customer"
+					},
+					"dateFrom": {
+						"type": "string",
+						"description": "Start date in format MM/DD/YYYY"
+					},
+					"dateTo": {
+						"type": "string",
+						"description": "End date in format MM/DD/YYYY"
+					}
+				},
+				"required": ["customerId"]
+			},
+			"annotations": {
+				"title": "Get Customer Transactions",
+				"readOnlyHint": true,
+				"idempotentHint": true,
+				"openWorldHint": false
+			}
+		},
+		{
+			"name": "getCustomerBalance",
+			"description": "Gets customer balance information",
+			"inputSchema": {
+				"type": "object",
+				"properties": {
+					"customerId": {
+						"type": "string",
+						"description": "The NetSuite ID of the customer"
+					}
+				},
+				"required": ["customerId"]
+			},
+			"annotations": {
+				"title": "Get Customer Balance",
+				"readOnlyHint": true,
+				"idempotentHint": true,
+				"openWorldHint": false
+			}
+		}
+	]
+}

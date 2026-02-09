@@ -1,0 +1,99 @@
+{
+  "tools": [
+    {
+      "name": "createItem",
+      "description": "Crea un artículo de inventario en NetSuite",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "itemSku": {
+            "type": "string",
+            "description": "Código o SKU del artículo"
+          },
+          "itemName": {
+            "type": "string",
+            "description": "Nombre del artículo"
+          },
+          "itemType": {
+            "type": "string",
+            "enum": ["inventoryitem", "serviceitem", "noninventoryitem"],
+            "description": "Tipo de artículo"
+          },
+          "description": { "type": "string" },
+          "displayName": { "type": "string" },
+          "cost": { "type": "number" },
+          "salePrice": { "type": "number" },
+          "assetAccount": { "type": "number" },
+          "incomeAccount": { "type": "number" },
+          "expenseAccount": { "type": "number" }
+        },
+        "required": ["itemSku", "itemName", "itemType"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Indica si el artículo fue creado correctamente"
+          },
+          "itemId": {
+            "type": "number",
+            "description": "ID interno del artículo creado"
+          },
+          "message": {
+            "type": "string"
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "required": ["success"]
+      },
+      "annotations": {
+        "title": "Create Inventory Item",
+        "readOnlyHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "getItem",
+      "description": "Obtiene la información de un artículo de inventario en NetSuite",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "type": "number",
+            "description": "ID interno del artículo en NetSuite"
+          }
+        },
+        "required": ["itemId"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "item": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "number" },
+              "sku": { "type": "string" },
+              "name": { "type": "string" },
+              "description": { "type": "string" },
+              "cost": { "type": "number" },
+              "salePrice": { "type": "number" }
+            }
+          },
+          "error": { "type": "string" }
+        },
+        "required": ["success"]
+      },
+      "annotations": {
+        "title": "Get Inventory Item",
+        "readOnlyHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    }
+  ]
+}
